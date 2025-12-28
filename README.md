@@ -1,16 +1,31 @@
-# ezhop
+# Ezhop
+## Identifying goals
+### Why am i making this project?
+To make easy Point of Sale application that is free and not web based. I choose to not use web based application because it's easier for older demographics to understand rather than starting web server separately in cli. 
+### Who is this project for?
+Mainly for small businesses that want to track their transactions without spending money.
+### What make this project valuable?
+It's free and open source + easy to use
 
-A new Flutter project.
+## User Story
+1. Business add their product to a database (name, buy price, sell price)
+2. Business can edit and delete product in database
+3. Business can do transaction and print the recipe
+4. Business can add events like "restock" and other so they can track stuff easily
+5. Business can create a bundle of product for some price
+6. The transaction will be recorded and categorized in some ways
+7. Business can see the analytics of their business (Highest selling product, most profitable product, etc.)
+8. Business can generate business report
 
-## Getting Started
+## Data Models
+Entity:
+- Product
+- Transaction
+- Bundle?
 
-This project is a starting point for a Flutter application.
+## Minimum Viable Product
+1. Business have a full catalogue feature (create, update, delete)
+2. Business can do transactions and record the history
+3. Business can generate a business report
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## SSP (Stupid Simple Prototype)
