@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 enum PaymentMethod { cash, qris, transferBank }
 
 class Transaction {
@@ -7,23 +9,24 @@ class Transaction {
   final double totalHarga;
   final double uangDiterima;
   final double uangKembalian;
+
   Transaction({
-    required this.id,
     required this.metodePembayaran,
     required this.totalHarga,
     required this.uangDiterima,
     required this.uangKembalian,
-  }) : waktuTransaksi = DateTime.now();
+  }) : waktuTransaksi = DateTime.now(),
+       id = Uuid().v4();
 
-  String get metode {
-    switch (metodePembayaran) {
-      case PaymentMethod.cash:
-        return "Cash";
-      case PaymentMethod.qris:
-        return "Qris";
-      case PaymentMethod.transferBank:
-        return "Transfer Bank";
-    }
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "waktuTransaksi": waktuTransaksi.toIso8601String(),
+      "metodePembayaran": metodePembayaran.name,
+      "totalHarga": totalHarga,
+      "uangDiterima": uangDiterima,
+      "uangKembalian": uangKembalian,
+    };
   }
 }
 
@@ -41,4 +44,13 @@ class TransactionProduk {
   });
 
   double get subtotal => hargaJual * jumlahBarang;
+
+  Map<String, dynamic> toMap() {
+    return {
+      "idTransaksi": idTransaksi,
+      "idProduk": idProduk,
+      "jumlahBarang": jumlahBarang,
+      "hargaJual": hargaJual,
+    };
+  }
 }

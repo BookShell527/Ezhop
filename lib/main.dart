@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:ezhop/pages/home.dart';
 import 'package:ezhop/pages/katalog.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
