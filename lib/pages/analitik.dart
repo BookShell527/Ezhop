@@ -1,3 +1,4 @@
+import 'package:ezhop/components/navbar.dart';
 import 'package:flutter/material.dart';
 
 class Analitik extends StatelessWidget {
@@ -5,6 +6,6 @@ class Analitik extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(appBar: Navbar(), body: Container());
   }
 }

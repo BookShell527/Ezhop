@@ -1,8 +1,8 @@
 import 'package:ezhop/components/navbar.dart';
 import 'package:flutter/material.dart';
 
-class Transaksi extends StatelessWidget {
-  const Transaksi({super.key});
+class Audit extends StatelessWidget {
+  const Audit({super.key});
 
   @override
   Widget build(BuildContext context) {

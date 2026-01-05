@@ -26,7 +26,7 @@ class AppDB {
         hargaBeli REAL NOT NULL, 
         hargaJual REAL NOT NULL, 
         jumlahBarang INTEGER NOT NULL
-      );''');
+    );''');
     await db.execute('''CREATE TABLE IF NOT EXISTS audit_produk (
           id TEXT PRIMARY KEY, 
           jenisTindakan TEXT NOT NULL,
@@ -41,24 +41,24 @@ class AppDB {
           hargaBeliSetelah REAL NOT NULL,
           hargaJualSetelah REAL NOT NULL,
           jumlahBarangSetelah INTEGER NOT NULL
-      )''');
+    )''');
     await db.execute('''CREATE TABLE IF NOT EXISTS bundle (
         id TEXT PRIMARY KEY, 
         nama TEXT NOT NULL, 
         hargaJual REAL NOT NULL, 
         hargaBeli REAL NOT NULL
-      );''');
+    );''');
     await db.execute('''CREATE TABLE IF NOT EXISTS bundle_produk (
         idBundle TEXT NOT NULL, 
         idProduk TEXT NOT NULL, 
         PRIMARY KEY (idBundle, idProduk)
-      );''');
+    );''');
     await db.execute('''CREATE TABLE IF NOT EXISTS catatan_restok (
         id TEXT PRIMARY KEY, 
         nama TEXT NOT NULL, 
         keterangan TEXT, 
         tanggal TEXT NOT NULL
-      );''');
+    );''');
     await db.execute('''CREATE TABLE IF NOT EXISTS transaksi (
         id TEXT PRIMARY KEY,
         waktuTransaksi TEXT NOT NULL,
@@ -66,13 +66,13 @@ class AppDB {
         totalHarga REAL NOT NULL,
         uangDiterima REAL NOT NULL,
         uangKembalian REAL NOT NULL
-      );''');
+    );''');
     await db.execute('''CREATE TABLE IF NOT EXISTS transaksi_produk (
         idTransaksi TEXT NOT NULL, 
         idProduk TEXT NOT NULL, 
         jumlahBarang INTEGER NOT NULL, 
         hargaJual REAL NOT NULL, 
         PRIMARY KEY (idTransaksi, idProduk)
-      );''');
+    );''');
   }
 }

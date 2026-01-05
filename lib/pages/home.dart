@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ezhop/components/navbar.dart';
 import 'package:ezhop/components/menucard.dart';
 
 class Home extends StatelessWidget {
@@ -28,15 +29,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Ezhop'),
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white,
-        actions: <Widget>[
-          IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
-          SizedBox(width: 10),
-        ],
-      ),
+      appBar: Navbar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GridView.builder(

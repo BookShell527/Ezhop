@@ -1,3 +1,4 @@
+import 'package:ezhop/components/navbar.dart';
 import 'package:flutter/material.dart';
 
 class Katalog extends StatelessWidget {
@@ -5,6 +6,13 @@ class Katalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: Navbar(),
+      body: Container(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }

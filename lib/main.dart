@@ -1,4 +1,5 @@
 import 'package:ezhop/pages/analitik.dart';
+import 'package:ezhop/pages/audit.dart';
 import 'package:ezhop/pages/transaksi.dart';
 import 'package:flutter/material.dart';
 import 'package:ezhop/pages/home.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         "/katalog": (context) => Katalog(),
         "/analitik": (context) => Analitik(),
         "/transaksi": (context) => Transaksi(),
+        "/audit": (context) => Audit(),
       },
     );
   }
