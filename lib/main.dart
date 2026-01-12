@@ -2,7 +2,8 @@ import 'package:ezhop/pages/catalogue.dart';
 import 'package:flutter/material.dart';
 import 'package:ezhop/pages/home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

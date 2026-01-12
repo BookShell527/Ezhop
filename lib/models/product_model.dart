@@ -23,4 +23,16 @@ class Product {
       'stock': stock,
     };
   }
+
+  static String toTable() {
+    return '''
+    CREATE TABLE IF NOT EXISTS product (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        buyPrice REAL NOT NULL,
+        sellPrice REAL NOT NULL,
+        stock INTEGER NOT NULL,
+    );
+    ''';
+  }
 }
