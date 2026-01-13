@@ -26,7 +26,7 @@ class TransactionDetail {
         id TEXT PRIMARY KEY,
         subtotalPrice REAL NOT NULL,
         quantity INTEGER NOT NULL,
-        unitPrice REAL NOT NULL,
+        unitPrice REAL NOT NULL
     );
     ''';
   }

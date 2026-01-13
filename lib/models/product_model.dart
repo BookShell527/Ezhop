@@ -14,6 +14,14 @@ class Product {
     required this.stock,
   }) : id = Uuid().v4();
 
+  Product.withId({
+    required this.id,
+    required this.name,
+    required this.buyPrice,
+    required this.sellPrice,
+    required this.stock,
+  });
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -24,6 +32,16 @@ class Product {
     };
   }
 
+  static Product fromMap(Map<String, dynamic> map) {
+    return Product.withId(
+      id: map["id"],
+      name: map["name"],
+      buyPrice: map["buyPrice"],
+      sellPrice: map["sellPrice"],
+      stock: map["stock"],
+    );
+  }
+
   static String toTable() {
     return '''
     CREATE TABLE IF NOT EXISTS product (
@@ -31,7 +49,7 @@ class Product {
         name TEXT NOT NULL,
         buyPrice REAL NOT NULL,
         sellPrice REAL NOT NULL,
-        stock INTEGER NOT NULL,
+        stock INTEGER NOT NULL
     );
     ''';
   }

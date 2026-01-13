@@ -3,7 +3,6 @@ import 'package:ezhop/components/product_form_dialog.dart';
 import 'package:ezhop/models/product_model.dart';
 import 'package:ezhop/utils/currency.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({super.key, required this.product});
@@ -24,8 +23,6 @@ class ProductTile extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-
-            // RIGHT SIDE: TEXT
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -42,12 +39,7 @@ class ProductTile extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "Id: " +
-                          product.id +
-                          "\nStok: " +
-                          product.stock.toString() +
-                          "\nHarga Beli: " +
-                          formatCurrency(product.buyPrice),
+                      "Id: ${product.id}\nStok: ${product.stock}\nHarga Beli: ${formatCurrency(product.buyPrice)}",
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],

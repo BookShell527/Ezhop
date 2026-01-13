@@ -1,17 +1,21 @@
+import 'package:ezhop/components/appbar.dart';
 import 'package:ezhop/components/product_form_dialog.dart';
 import 'package:ezhop/components/product_tile.dart';
+import 'package:ezhop/controllers/product_controller.dart';
 import 'package:ezhop/models/product_model.dart';
 import 'package:ezhop/utils/data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:window_manager/window_manager.dart';
 
-class Catalogue extends StatefulWidget {
+class Catalogue extends ConsumerStatefulWidget {
   const Catalogue({super.key});
 
   @override
-  State<Catalogue> createState() => _CatalogueState();
+  ConsumerState<Catalogue> createState() => _CatalogueState();
 }
 
-class _CatalogueState extends State<Catalogue> {
+class _CatalogueState extends ConsumerState<Catalogue> {
   List<Product> _filterProduct = [];
   @override
   void initState() {
@@ -37,16 +41,10 @@ class _CatalogueState extends State<Catalogue> {
 
   @override
   Widget build(BuildContext context) {
+    final productAsync = ref.watch(productController);
     return Scaffold(
       backgroundColor: Colors.grey[50],
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.grey[200],
-        title: Text(
-          "Katalog Produk",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
+      appBar: DesktopAppbar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
         child: Column(
@@ -119,12 +117,16 @@ class _CatalogueState extends State<Catalogue> {
             ),
             SizedBox(height: 10),
             Expanded(
-              child: ListView.builder(
-                itemCount: _filterProduct.length,
-                addAutomaticKeepAlives: false,
-                itemBuilder: (_, i) {
-                  return ProductTile(product: _filterProduct[i]);
-                },
+              child: productAsync.when(
+                loading: () => const CircularProgressIndicator(),
+                error: (err, stack) => Center(child: Text('$err')),
+                data: (products) => ListView.builder(
+                  itemCount: products.length,
+                  itemBuilder: (context, i) {
+                    final product = products[i];
+                    return ProductTile(product: product);
+                  },
+                ),
               ),
             ),
           ],

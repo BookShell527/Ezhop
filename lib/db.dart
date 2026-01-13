@@ -1,8 +1,10 @@
-import 'package:sqflite/sqflite.dart';
+import 'dart:io';
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:ezhop/models/product_model.dart';
 import 'package:ezhop/models/transaction_detail_model.dart';
 import 'package:ezhop/models/transaction_model.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class DBHelper {
   DBHelper._privateConstructor();
@@ -15,7 +17,8 @@ class DBHelper {
   }
 
   Future<Database> _initDB() async {
-    String dbpath = join(await getDatabasesPath(), 'ezhop.db');
+    Directory dir = await getApplicationDocumentsDirectory();
+    String dbpath = join(dir.path, 'ezhop.db');
     return await openDatabase(dbpath, version: 1, onCreate: _onCreate);
   }
 

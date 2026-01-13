@@ -29,13 +29,13 @@ class Transactions {
 
   static String toTable() {
     return '''
-    CREATE TABLE IF NOT EXISTS transaction (
+    CREATE TABLE IF NOT EXISTS transactions (
         id TEXT PRIMARY KEY,
         datetime TEXT NOT NULL,
         totalPrice REAL NOT NULL,
         paymentMethod TEXT NOT NULL,
         paidPrice REAL NOT NULL,
-        changePrice REAL NOT NULL,
+        changePrice REAL NOT NULL
     );
     ''';
   }
