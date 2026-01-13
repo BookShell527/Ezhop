@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:ezhop/pages/catalogue.dart';
+import 'package:ezhop/pages/home.dart';
+import 'package:ezhop/pages/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -35,7 +37,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
       debugShowCheckedModeBanner: false,
-      home: Catalogue(),
+      home: SelectableRegion(
+        selectionControls: materialTextSelectionControls,
+        child: CataloguePage(),
+      ),
     );
   }
 }

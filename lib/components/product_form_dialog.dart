@@ -7,28 +7,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void showProductFormDialog(BuildContext context, {Product? product}) {
   // Controllers to capture user input
-  final idController = TextEditingController();
-  final nameController = TextEditingController();
-  final stockController = TextEditingController();
-  final buyPriceController = TextEditingController();
-  final sellPriceController = TextEditingController();
+  final idCtrl = TextEditingController();
+  final nameCtrl = TextEditingController();
+  final stockCtrl = TextEditingController();
+  final buyPriceCtrl = TextEditingController();
+  final sellPriceCtrl = TextEditingController();
 
-  idController.text = product?.id ?? "";
-  nameController.text = product?.name ?? "";
-  stockController.text = product?.stock.toString() ?? "";
-  buyPriceController.text = product?.buyPrice.toString() ?? "";
-  sellPriceController.text = product?.sellPrice.toString() ?? "";
+  idCtrl.text = product?.id ?? "";
+  nameCtrl.text = product?.name ?? "";
+  stockCtrl.text = product?.stock.toString() ?? "";
+  buyPriceCtrl.text = product?.buyPrice.toString() ?? "";
+  sellPriceCtrl.text = product?.sellPrice.toString() ?? "";
 
   showDialog(
     context: context,
     builder: (context) {
       return Consumer(
         builder: (context, ref, child) {
-          final productAsync = ref.watch(productController);
           return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
+            shape: RoundedRectangleBorder(borderRadius: .circular(20)),
             child: SizedBox(
               child: Row(
                 children: [
@@ -37,23 +34,23 @@ void showProductFormDialog(BuildContext context, {Product? product}) {
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.grey[100],
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
+                        borderRadius: .only(
+                          topLeft: .circular(20),
+                          bottomLeft: .circular(20),
                         ),
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: .center,
                         children: [
                           Container(
                             width: 150,
                             height: 150,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              shape: BoxShape.circle,
+                              shape: .circle,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
+                                  color: Colors.black.withValues(alpha: 0.1),
                                   blurRadius: 10,
                                 ),
                               ],
@@ -70,7 +67,7 @@ void showProductFormDialog(BuildContext context, {Product? product}) {
                             style: TextStyle(
                               fontSize: 18,
                               color: Colors.grey,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: .bold,
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -85,16 +82,13 @@ void showProductFormDialog(BuildContext context, {Product? product}) {
                   Expanded(
                     flex: 6,
                     child: Padding(
-                      padding: const EdgeInsets.all(40.0),
+                      padding: .all(40.0),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: .start,
                         children: [
                           Text(
                             "${product == null ? "Tambah" : "Edit"} Produk",
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: TextStyle(fontSize: 28, fontWeight: .bold),
                           ),
                           Text(
                             "${product == null ? "Isi" : "Edit"} data produk di bawah",
@@ -105,14 +99,14 @@ void showProductFormDialog(BuildContext context, {Product? product}) {
                             _buildLabel("Id Produk"),
                             TextField(
                               enabled: false,
-                              controller: idController,
+                              controller: idCtrl,
                               decoration: _inputDecoration("Id"),
                             ),
                             const SizedBox(height: 20),
                           ],
                           _buildLabel("Nama Produk"),
                           TextField(
-                            controller: nameController,
+                            controller: nameCtrl,
                             decoration: _inputDecoration(
                               "Contoh: Pakan Ikan Gatul",
                             ),
@@ -121,7 +115,7 @@ void showProductFormDialog(BuildContext context, {Product? product}) {
                           Row(
                             children: [
                               _numberTextField(
-                                stockController,
+                                stockCtrl,
                                 "Stok / Kuantitas",
                                 false,
                               ),
@@ -134,13 +128,13 @@ void showProductFormDialog(BuildContext context, {Product? product}) {
                           Row(
                             children: [
                               _numberTextField(
-                                buyPriceController,
+                                buyPriceCtrl,
                                 "Harga Beli",
                                 true,
                               ),
                               const SizedBox(width: 20),
                               _numberTextField(
-                                sellPriceController,
+                                sellPriceCtrl,
                                 "Harga Jual",
                                 true,
                               ),
@@ -148,7 +142,7 @@ void showProductFormDialog(BuildContext context, {Product? product}) {
                           ),
                           const Spacer(),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                            mainAxisAlignment: .end,
                             children: [
                               DialogButton(
                                 onPressed: () {
@@ -162,33 +156,21 @@ void showProductFormDialog(BuildContext context, {Product? product}) {
                                 onPressed: () async {
                                   if (product == null) {
                                     Product newProduct = Product(
-                                      name: nameController.text,
-                                      buyPrice: double.tryParse(
-                                        buyPriceController.text,
-                                      )!,
-                                      sellPrice: double.tryParse(
-                                        sellPriceController.text,
-                                      )!,
-                                      stock: int.tryParse(
-                                        stockController.text,
-                                      )!,
+                                      name: nameCtrl.text,
+                                      buyPrice: .tryParse(buyPriceCtrl.text)!,
+                                      sellPrice: .tryParse(sellPriceCtrl.text)!,
+                                      stock: .tryParse(stockCtrl.text)!,
                                     );
                                     await ref
                                         .read(productController.notifier)
                                         .insertProduct(newProduct);
                                   } else {
                                     Product newProduct = Product.withId(
-                                      id: idController.text,
-                                      name: nameController.text,
-                                      buyPrice: double.tryParse(
-                                        buyPriceController.text,
-                                      )!,
-                                      sellPrice: double.tryParse(
-                                        sellPriceController.text,
-                                      )!,
-                                      stock: int.tryParse(
-                                        stockController.text,
-                                      )!,
+                                      id: idCtrl.text,
+                                      name: nameCtrl.text,
+                                      buyPrice: .tryParse(buyPriceCtrl.text)!,
+                                      sellPrice: .tryParse(sellPriceCtrl.text)!,
+                                      stock: .tryParse(stockCtrl.text)!,
                                     );
                                     await ref
                                         .read(productController.notifier)
@@ -218,7 +200,7 @@ void showProductFormDialog(BuildContext context, {Product? product}) {
 Widget _numberTextField(
   TextEditingController controller,
   String label,
-  bool currency,
+  bool isCurrency,
 ) {
   return Expanded(
     child: Column(
@@ -227,9 +209,9 @@ Widget _numberTextField(
         _buildLabel(label),
         TextField(
           controller: controller,
-          keyboardType: TextInputType.number,
+          keyboardType: .number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          decoration: _inputDecoration("0", prefix: currency ? "Rp " : null),
+          decoration: _inputDecoration("0", prefix: isCurrency ? "Rp " : null),
         ),
       ],
     ),
@@ -240,19 +222,16 @@ InputDecoration _inputDecoration(String hint, {String? prefix}) {
   return InputDecoration(
     hintText: hint,
     prefixText: prefix,
-    prefixStyle: const TextStyle(
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-    ),
+    prefixStyle: const TextStyle(color: Colors.black, fontWeight: .bold),
     filled: true,
     fillColor: Colors.grey[50],
-    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+    contentPadding: .symmetric(horizontal: 20, vertical: 20),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: .circular(12),
       borderSide: BorderSide(color: Colors.grey.shade300),
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: .circular(12),
       borderSide: BorderSide(color: Colors.grey.shade300),
     ),
   );
@@ -260,11 +239,11 @@ InputDecoration _inputDecoration(String hint, {String? prefix}) {
 
 Widget _buildLabel(String text) {
   return Padding(
-    padding: const EdgeInsets.only(bottom: 8.0),
+    padding: .only(bottom: 8.0),
     child: Text(
       text,
       style: const TextStyle(
-        fontWeight: FontWeight.bold,
+        fontWeight: .bold,
         fontSize: 14,
         color: Colors.black87,
       ),

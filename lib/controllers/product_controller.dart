@@ -2,13 +2,23 @@ import 'dart:async';
 import 'package:ezhop/models/product_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ezhop/db.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class ProductController extends AsyncNotifier<List<Product>> {
   final DBHelper _dbHelper = DBHelper.instance;
   @override
   FutureOr<List<Product>> build() async {
     return _fetchProduct();
+  }
+
+  Future<Product?> getProduct(String id) async {
+    final db = await _dbHelper.db;
+    final productMap = await db.query(
+      'product',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    final result = productMap.map((map) => Product.fromMap(map)).toList();
+    return result[0];
   }
 
   Future<void> insertProduct(Product product) async {
@@ -21,7 +31,7 @@ class ProductController extends AsyncNotifier<List<Product>> {
 
   Future<void> deleteProduct(String id) async {
     state = await AsyncValue.guard(() async {
-      final db = await DBHelper.instance.db;
+      final db = await _dbHelper.db;
       await db.delete('product', where: 'id = ?', whereArgs: [id]);
       return _fetchProduct();
     });

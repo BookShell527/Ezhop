@@ -11,31 +11,28 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card.outlined(
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: .antiAlias,
       child: IntrinsicHeight(
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: .stretch,
           children: [
             SizedBox(
               width: 100,
               child: Image.network(
                 "https://images.pexels.com/photos/1133505/pexels-photo-1133505.jpeg?cs=srgb&dl=pexels-jplenio-1133505.jpg&fm=jpg",
-                fit: BoxFit.cover,
+                fit: .cover,
               ),
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: .all(16.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: .center,
+                  crossAxisAlignment: .start,
                   children: [
                     Text(
                       product.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                      style: const TextStyle(fontWeight: .bold, fontSize: 16),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -47,12 +44,12 @@ class ProductTile extends StatelessWidget {
               ),
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: .center,
               children: [
                 Text(
                   formatCurrency(product.sellPrice),
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                    fontWeight: .bold,
                     color: Colors.green[700],
                     fontSize: 20,
                   ),
