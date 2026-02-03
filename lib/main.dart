@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: SelectableRegion(
         selectionControls: materialTextSelectionControls,
-        child: CataloguePage(),
+        child: HomePage(),
       ),
     );
   }
